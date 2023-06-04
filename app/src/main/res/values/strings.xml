@@ -5,4 +5,13 @@
     <string name="send_button_desc">Botão de enviar</string>
     <string name="add_button_desc">Botão de adicionar ponto</string>
     <string name="del_button_desc">Botão de deletar Área</string>
+    <string name="title_activity_planner">PlannerActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="menu_areas">Áreas</string>
+    <string name="menu_fornecedores">Fornecedores</string>
+    <string name="menu_calendario">Calendário</string>
+    <string name="menu_financeiro">Financeiro</string>
+    <string name="menu_alimentos">Meus Alimentos</string>
 </resources>

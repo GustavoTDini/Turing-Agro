@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_area">
+
+    <fragment
+        android:id="@+id/navigation_area"
+        android:name="com.example.turing_agro.AreaFragment"
+        android:label="@string/menu_areas"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_suppliers"
+        android:name="com.example.turing_agro.SupplyFragment"
+        android:label="@string/menu_fornecedores"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_calendar"
+        android:name="com.example.turing_agro.CalendarFragment"
+        android:label="@string/menu_calendario"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_finance"
+        android:name="com.example.turing_agro.FinanceFragment"
+        android:label="@string/menu_financeiro"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_food"
+        android:name="com.example.turing_agro.FoodFragment"
+        android:label="@string/menu_alimentos"
+        tools:layout="@layout/fragment_notifications" />
+
+</navigation>

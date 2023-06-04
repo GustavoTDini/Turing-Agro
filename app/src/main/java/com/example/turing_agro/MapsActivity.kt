@@ -37,7 +37,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnMapClickListener
 
     private val permissionId = 10011001
     private var editable: Boolean = false
-    private var showDel: Boolean = false
     private lateinit var mMap: GoogleMap
     private lateinit var mPolygon: Polygon
     private lateinit var binding: ActivityMapsBinding

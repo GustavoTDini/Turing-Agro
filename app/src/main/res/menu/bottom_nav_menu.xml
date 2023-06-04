@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_area"
+        android:icon="@drawable/ic_map"
+        android:title="@string/menu_areas" />
+
+    <item
+        android:id="@+id/navigation_suppliers"
+        android:icon="@drawable/ic_supply"
+        android:title="@string/menu_fornecedores" />
+
+    <item
+        android:id="@+id/navigation_calendar"
+        android:icon="@drawable/ic_calendar"
+        android:title="@string/menu_calendario" />
+
+    <item
+        android:id="@+id/navigation_finance"
+        android:icon="@drawable/ic_money"
+        android:title="@string/menu_financeiro" />
+
+    <item
+        android:id="@+id/navigation_food"
+        android:icon="@drawable/ic_food"
+        android:title="@string/menu_alimentos" />
+</menu>
