@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Turing Agro</string>
+    <string name="iniciar_button">Iniciar</string>
+    <string name="title_activity_maps">Selecione a area a ser Estudada</string>
+    <string name="send_button_desc">Botão de enviar</string>
+    <string name="add_button_desc">Botão de adicionar ponto</string>
+    <string name="del_button_desc">Botão de deletar Área</string>
+</resources>
