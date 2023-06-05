@@ -9,30 +9,55 @@
         android:id="@+id/navigation_area"
         android:name="com.example.turing_agro.AreaFragment"
         android:label="@string/menu_areas"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+<!--        <argument-->
+<!--            android:name="myArg"-->
+<!--            app:argType="<type>"-->
+<!--            android:defaultValue="0" />-->
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_suppliers"
         android:name="com.example.turing_agro.SupplyFragment"
         android:label="@string/menu_fornecedores"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+<!--        <argument-->
+<!--            android:name="supplyList"-->
+<!--            app:argType="com.example.turing_agro.models.Supply"-->
+<!--            android:defaultValue="null" />-->
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_calendar"
         android:name="com.example.turing_agro.CalendarFragment"
         android:label="@string/menu_calendario"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" >
+<!--        <argument-->
+<!--            android:name="calendarList"-->
+<!--            app:argType=""-->
+<!--            android:defaultValue="null" />-->
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_finance"
         android:name="com.example.turing_agro.FinanceFragment"
         android:label="@string/menu_financeiro"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" >
+<!--        <argument-->
+<!--            android:name="myArg"-->
+<!--            app:argType="integer"-->
+<!--            android:defaultValue="0" />-->
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_food"
         android:name="com.example.turing_agro.FoodFragment"
         android:label="@string/menu_alimentos"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" >
+<!--        <argument-->
+<!--            android:name="foodList"-->
+<!--            app:argType="com.example.turing_agro.models.Food"-->
+<!--            android:defaultValue="null" />-->
+    </fragment>
 
 </navigation>

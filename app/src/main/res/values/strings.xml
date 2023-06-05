@@ -14,4 +14,26 @@
     <string name="menu_calendario">Calendário</string>
     <string name="menu_financeiro">Financeiro</string>
     <string name="menu_alimentos">Meus Alimentos</string>
+    <string name="supply_item_image_desc">Imagem do Item</string>
+    <string name="item_label">Item:</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="quantity_label">Quantidade:</string>
+    <string name="supplier_label">Fornecedor:</string>
+    <string name="food_image_desc">Imagem do Alimento</string>
+    <string name="food_label">Alimento:</string>
+    <string name="self_percentage_label">% para consumo:</string>
+    <string name="sell_percentage_label">% para venda:</string>
+    <string name="crop_label">Área a cultivar:</string>
+    <string name="date_label">Data:</string>
+    <string name="date_crop_label">Área:</string>
+    <string name="date_action_label">Ação:</string>
+    <string name="check_label">Feito</string>
+    <string name="out_label">Saídas:</string>
+    <string name="in_labels">Entradas:</string>
+    <string name="balance_label">Balanço:</string>
+    <string name="expected_value_label">Previsto</string>
+    <string name="confirmed_value_label">Confirmado</string>
+    <string name="line_item">Item</string>
+    <string name="line_quantity">Quantidade</string>
+    <string name="add_calendar_fab_desc">Add to Calendar FAB</string>
 </resources>

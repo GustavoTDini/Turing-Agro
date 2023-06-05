@@ -31,6 +31,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polygon
 import com.google.android.gms.maps.model.PolygonOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.io.Serializable
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnMapClickListener, OnMarkerDragListener, OnMarkerClickListener {
@@ -58,12 +59,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnMapClickListener
 
         val addButton = findViewById<FloatingActionButton>(R.id.add_floating_button)
         addButton.setOnClickListener{
-            if (editable){
+            editable = if (editable){
                 Toast.makeText(this, "Desligando edição", Toast.LENGTH_SHORT).show()
-                editable = false
+                false
             } else{
                 Toast.makeText(this, "Iniciando edição", Toast.LENGTH_SHORT).show()
-                editable = true
+                true
             }
         }
         mDelButton = findViewById(R.id.del_floating_button)
@@ -83,6 +84,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnMapClickListener
         sendButton.setOnClickListener{
             if(mPolygonJoints.size > 3){
                 val generatingIntent = Intent(this, GeneratingActivity::class.java)
+                generatingIntent.putExtra("points",mPolygonJoints as Serializable)
                 startActivity(generatingIntent)
             } else{
                 Toast.makeText(this, "Por Favor, defina o local de sua terra!", Toast.LENGTH_LONG).show()
