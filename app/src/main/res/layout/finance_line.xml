@@ -1,105 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="80dp"
-android:orientation="horizontal"
-    android:weightSum="4">
-
 <LinearLayout
-    android:layout_width="0dp"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_weight="1">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/line_item_label"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="@string/line_item"
-        android:textAppearance="?attr/textAppearanceLabelSmall" />
+        android:orientation="horizontal"
+        android:weightSum="4">
 
-    <TextView
-        android:id="@+id/line_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/placeholder"
-        android:textAppearance="?attr/textAppearanceListItemSmall"
-        android:textSize="12sp"/>
-</LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/line_quantity_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="@string/line_quantity"
-        android:textAppearance="?attr/textAppearanceLabelSmall" />
+            <TextView
+                android:id="@+id/line_item_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/line_item"
+                android:textAppearance="?attr/textAppearanceLabelSmall" />
 
-    <TextView
-        android:id="@+id/line_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/placeholder"
-        android:textAppearance="?attr/textAppearanceListItemSmall"
-        android:textSize="12sp"/>
-</LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
+            <TextView
+                android:id="@+id/line_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/placeholder"
+                android:textAppearance="?attr/textAppearanceListItemSmall"
+                android:textSize="12sp"/>
 
-    <TextView
-        android:id="@+id/line_expected_value_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="@string/expected_value_label"
-        android:textAppearance="?attr/textAppearanceLabelSmall" />
 
-        <TextView
-            android:id="@+id/line_expected_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/placeholder"
-            android:textAppearance="?attr/textAppearanceListItemSmall"
-            android:textSize="12sp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/line_quantity_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/line_quantity"
+                android:textAppearance="?attr/textAppearanceLabelSmall" />
+
+            <TextView
+                android:id="@+id/line_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/placeholder"
+                android:textAppearance="?attr/textAppearanceListItemSmall"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/line_expected_value_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/expected_value_label"
+                android:textAppearance="?attr/textAppearanceLabelSmall" />
+
+            <TextView
+                android:id="@+id/line_expected_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/placeholder"
+                android:textAppearance="?attr/textAppearanceListItemSmall"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/line_confirmed_value_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/confirmed_value_label"
+                android:textAppearance="?attr/textAppearanceLabelSmall" />
+
+            <EditText
+                android:id="@+id/line_confirmed_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:inputType="number"
+                android:textAppearance="?attr/textAppearanceListItemSmall"
+                android:textSize="16sp"
+                android:autofillHints="00"/>
+
+        </LinearLayout>
+
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/line_confirmed_value_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="@string/confirmed_value_label"
-        android:textAppearance="?attr/textAppearanceLabelSmall" />
-
-    <EditText
-        android:id="@+id/line_confirmed_value"
+    <View
+        android:id="@+id/divider7"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:inputType="number"
-        android:textAppearance="?attr/textAppearanceListItemSmall"
-        android:textSize="12sp"
-        android:autofillHints="00" />
-</LinearLayout>
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
 
 </LinearLayout>
+
+
+

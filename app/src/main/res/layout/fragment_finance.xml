@@ -10,17 +10,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/out_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/out_label"
-            android:textAppearance="?attr/textAppearanceLabelLarge"
-            android:textColor="@color/md_theme_light_primary"/>
+            android:padding="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAlignment="textEnd"
+            android:textColor="@color/md_theme_light_onPrimary"
+            android:background="@color/md_theme_light_primary"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -30,12 +32,16 @@
             app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/finance_line" />
 
+
+
         <TextView
             android:id="@+id/total_outcome_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total"
-            android:textAppearance="?attr/textAppearanceLabelSmall" />
+            android:text="@string/total_label"
+            android:textAppearance="?attr/textAppearanceLabelLarge"
+            android:textAlignment="center"
+            android:textColor="@color/md_theme_light_primary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,19 +56,21 @@
                 android:layout_weight="2">
 
                 <TextView
-                    android:id="@+id/expected_total_income_label"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/expected_total_outcome_label"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:paddingStart="4dp"
                     android:text="@string/expected_value_label"
                     android:textAppearance="?attr/textAppearanceLabelSmall"
                     android:textSize="12sp"/>
 
                 <TextView
-                    android:id="@+id/expected_total_income"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/expected_total_outcome"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:paddingStart="4dp"
                     android:text="@string/placeholder"
                     android:textAppearance="?attr/textAppearanceListItemSmall"
                     android:textSize="12sp"/>
@@ -75,19 +83,23 @@
                 android:layout_weight="2">
 
                 <TextView
-                    android:id="@+id/confirmed_total_income_label"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/confirmed_total_outcome_label"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:paddingEnd="4dp"
+                    android:textAlignment="textEnd"
                     android:text="@string/confirmed_value_label"
                     android:textAppearance="?attr/textAppearanceLabelSmall"
                     android:textSize="12sp"/>
 
                 <TextView
-                    android:id="@+id/confirmed_total_income"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/confirmed_total_outcome"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:paddingEnd="4dp"
+                    android:textAlignment="textEnd"
                     android:text="@string/placeholder"
                     android:textAppearance="?attr/textAppearanceListItemSmall"
                     android:textSize="12sp"/>
@@ -107,8 +119,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/in_labels"
-            android:textAppearance="?attr/textAppearanceLabelLarge"
-            android:textColor="@color/md_theme_light_primary"/>
+            android:padding="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAlignment="textEnd"
+            android:textColor="@color/md_theme_light_onPrimary"
+            android:background="@color/md_theme_light_primary"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/income_list"
@@ -116,6 +131,18 @@
             android:layout_height="wrap_content"
             app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/finance_line" />
+
+
+
+
+        <TextView
+            android:id="@+id/total_income_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/total_label"
+            android:textAppearance="?attr/textAppearanceLabelLarge"
+            android:textAlignment="center"
+            android:textColor="@color/md_theme_light_primary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -130,19 +157,21 @@
                 android:layout_weight="2">
 
                 <TextView
-                    android:id="@+id/expected_total_outcome_label"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/expected_total_income_label"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:paddingStart="4dp"
                     android:text="@string/expected_value_label"
                     android:textAppearance="?attr/textAppearanceLabelSmall"
                     android:textSize="12sp"/>
 
                 <TextView
-                    android:id="@+id/expected_total_outcome"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/expected_total_income"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:paddingStart="4dp"
                     android:text="@string/placeholder"
                     android:textAppearance="?attr/textAppearanceListItemSmall"
                     android:textSize="12sp"/>
@@ -155,19 +184,23 @@
                 android:layout_weight="2">
 
                 <TextView
-                    android:id="@+id/confirmed_total_outcome_label"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/confirmed_total_income_label"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:paddingEnd="4dp"
+                    android:textAlignment="textEnd"
                     android:text="@string/confirmed_value_label"
                     android:textAppearance="?attr/textAppearanceLabelSmall"
                     android:textSize="12sp"/>
 
                 <TextView
-                    android:id="@+id/confirmed_total_outcome"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/confirmed_total_income"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:paddingEnd="4dp"
+                    android:textAlignment="textEnd"
                     android:text="@string/placeholder"
                     android:textAppearance="?attr/textAppearanceListItemSmall"
                     android:textSize="12sp"/>
@@ -187,8 +220,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/balance_label"
-            android:textAppearance="?attr/textAppearanceLabelLarge"
-            android:textColor="@color/md_theme_light_primary"/>
+            android:padding="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAlignment="textEnd"
+            android:textColor="@color/md_theme_light_onPrimary"
+            android:background="@color/md_theme_light_primary"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -203,18 +239,20 @@
                 android:layout_weight="2">
 
                 <TextView
-                    android:id="@+id/expected_value_label"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/expected_balance_label"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:paddingStart="4dp"
                     android:text="@string/expected_value_label"
                     android:textAppearance="?attr/textAppearanceLabelSmall" />
 
                 <TextView
-                    android:id="@+id/expected_value"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/expected_balance"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:paddingStart="4dp"
                     android:text="@string/placeholder"
                     android:textAppearance="?attr/textAppearanceListItemSmall" />
             </LinearLayout>
@@ -226,18 +264,22 @@
                 android:layout_weight="2">
 
                 <TextView
-                    android:id="@+id/confirmed_value_label"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/confirmed_balance_label"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:paddingEnd="4dp"
+                    android:textAlignment="textEnd"
                     android:text="@string/confirmed_value_label"
                     android:textAppearance="?attr/textAppearanceLabelSmall" />
 
                 <TextView
-                    android:id="@+id/confirmed_value"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/confirmed_balance"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:paddingEnd="4dp"
+                    android:textAlignment="textEnd"
                     android:text="@string/placeholder"
                     android:textAppearance="?attr/textAppearanceListItemSmall" />
             </LinearLayout>

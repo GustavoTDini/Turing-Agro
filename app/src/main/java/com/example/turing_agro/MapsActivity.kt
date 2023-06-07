@@ -1,18 +1,12 @@
 package com.example.turing_agro
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
-import android.provider.Settings
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import com.example.turing_agro.databinding.ActivityMapsBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -36,7 +30,6 @@ import java.io.Serializable
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnMapClickListener, OnMarkerDragListener, OnMarkerClickListener {
 
-    private val permissionId = 10011001
     private var editable: Boolean = false
     private lateinit var mMap: GoogleMap
     private lateinit var mPolygon: Polygon
@@ -83,11 +76,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnMapClickListener
         val sendButton = findViewById<FloatingActionButton>(R.id.send_floating_button)
         sendButton.setOnClickListener{
             if(mPolygonJoints.size > 3){
-                val generatingIntent = Intent(this, GeneratingActivity::class.java)
-                generatingIntent.putExtra("points",mPolygonJoints as Serializable)
-                startActivity(generatingIntent)
+                if (checkIfIntersectes(mPolygonJoints)){
+                    Toast.makeText(this, "A sua área está irregular, por favor corrija-a!", Toast.LENGTH_LONG).show()
+                } else{
+                    val generatingIntent = Intent(this, GeneratingActivity::class.java)
+                    generatingIntent.putExtra("points",mPolygonJoints as Serializable)
+                    startActivity(generatingIntent)
+                }
+
             } else{
-                Toast.makeText(this, "Por Favor, defina o local de sua terra!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Por Favor, defina o local de sua terra com ao menos 4 pontos!", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -110,66 +108,28 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnMapClickListener
         mMap.setOnMapClickListener(this)
         mMap.setOnMarkerClickListener(this)
         mMap.setOnMarkerDragListener(this)
-        getLocation()
+        setLocation()
     }
-
 
     @SuppressLint("MissingPermission")
-    private fun getLocation() {
-        if (checkPermissions()) {
-            if (isLocationEnabled()) {
-                mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
-                    val location: Location? = task.result
-                    if (location != null) {
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 17f))
-                        val poligonOptions = PolygonOptions()
-                            .strokeWidth(15F)
-                            .add(LatLng(location.latitude, location.longitude))
-                        mPolygon = mMap.addPolygon(poligonOptions)
-                    }
-                }
-            } else {
-                Toast.makeText(this, "Por favor, ligue o serviço de localização", Toast.LENGTH_LONG).show()
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                startActivity(intent)
+    private fun setLocation() {
+        mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
+            val location: Location? = task.result
+            if (location != null) {
+                mMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        LatLng(
+                            location.latitude,
+                            location.longitude
+                        ), 17f
+                    )
+                )
+                val poligonOptions = PolygonOptions()
+                    .strokeWidth(15F)
+                    .add(LatLng(location.latitude, location.longitude))
+                mPolygon = mMap.addPolygon(poligonOptions)
             }
-        } else {
-            requestPermissions()
         }
-    }
-
-    private fun isLocationEnabled(): Boolean {
-        val locationManager: LocationManager =
-            this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
-    }
-
-    private fun checkPermissions(): Boolean {
-        if (ActivityCompat.checkSelfPermission(
-                this.applicationContext,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(
-                this.applicationContext,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            return true
-        }
-        return false
-    }
-
-    private fun requestPermissions() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ),
-            permissionId
-        )
     }
 
     override fun onMapClick(clickLocation: LatLng) {
@@ -228,4 +188,36 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnMapClickListener
         }
         return true
     }
+
+    private fun intersectionBetweenSegmentsCL(p0: LatLng, p1: LatLng, p2: LatLng, p3: LatLng): Boolean {
+        var denominator = (p3.longitude - p2.longitude) * (p1.latitude - p0.latitude) - (p3.latitude - p2.latitude) * (p1.longitude - p0.longitude)
+        var ua = (p3.latitude - p2.latitude) * (p0.longitude - p2.longitude) - (p3.longitude - p2.longitude) * (p0.latitude - p2.latitude)
+        var ub = (p1.latitude - p0.latitude) * (p0.longitude - p2.longitude) - (p1.longitude - p0.longitude) * (p0.latitude - p2.latitude)
+
+        if (denominator < 0) {
+            ua = -ua; ub = -ub
+            denominator = -denominator
+        }
+
+        if (ua >= 0.0 && ua <= denominator && ub >= 0.0 && ub <= denominator && !denominator.equals(0.0)) {
+            return true
+        }
+        return false
+    }
+
+    private fun checkIfIntersectes(list: ArrayList<LatLng>): Boolean{
+        if (list.size > 2) {
+            val size = list.size - 1
+
+            for (i in 1 until  size) {
+                for (j in 0 until i-1) {
+                    if (intersectionBetweenSegmentsCL(list[i], list[i+1], list[j], list[j+1])) {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
+
 }

@@ -5,7 +5,8 @@ import java.io.Serializable
 class Finance (
     val nome: String,
     val quantidade: Int,
-    val previsto: Int,
+    val previsto: Float,
+    var real: Float
 ) : Serializable {
 
 }

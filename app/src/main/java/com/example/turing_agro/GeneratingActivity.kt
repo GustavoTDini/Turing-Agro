@@ -4,13 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.turing_agro.models.Calendar
 import com.example.turing_agro.models.Finance
 import com.example.turing_agro.models.Food
+import com.example.turing_agro.models.Polygon
 import com.example.turing_agro.models.Supply
+import com.example.turing_agro.models.Vertice
 import com.google.android.gms.maps.model.LatLng
-import org.json.JSONObject
 import java.io.Serializable
 
 class GeneratingActivity : AppCompatActivity() {
@@ -36,7 +38,10 @@ class GeneratingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_generating)
         val pointsList: MutableList<LatLng>  = intent.getSerializableExtra("points") as MutableList<LatLng>
-        var polygonsList: ArrayList<JSONObject> = ArrayList()
+        val polygonsList: ArrayList<Polygon> = ArrayList()
+        val polygonsCenters: ArrayList<Vertice> = ArrayList()
+        var centroidLat = 0.0
+        var centroidLng = 0.0
         val suppliersList: ArrayList<Supply> = ArrayList()
         val calendarList: ArrayList<Calendar> = ArrayList()
         val incomeList: ArrayList<Finance> = ArrayList()
@@ -69,10 +74,14 @@ class GeneratingActivity : AppCompatActivity() {
                 }
             }
 
-            val outcome = Finance(insumos[i], quantidadeInsumos, quantidadeInsumos*valor_insumos[i])
+            val outcome = Finance(insumos[i], quantidadeInsumos,
+                (quantidadeInsumos*valor_insumos[i]).toFloat(), 0F
+            )
             outcomeList.add(outcome)
 
-            val income = Finance(alimentos[i], quantidadeComida, quantidadeComida*valor_alimentos[i])
+            val income = Finance(alimentos[i], quantidadeComida,
+                (quantidadeComida*valor_alimentos[i]).toFloat(), 0F
+            )
             incomeList.add(income)
 
             // Create Random Food
@@ -82,6 +91,46 @@ class GeneratingActivity : AppCompatActivity() {
             crop ++
         }
 
+        val centroid = findCentroid(pointsList as ArrayList<LatLng>)
+        centroidLat = centroid.latitude
+        centroidLng = centroid.longitude
+
+        val pointsSize = pointsList.size
+        val vertices = (pointsSize/4) + 1
+        val resto = pointsSize%4
+        val verticesList  = mutableListOf(0, 0, 0, 0)
+
+        for (i in 1..4){
+            var putVertice = vertices
+            if (i<= resto){
+                putVertice += 1
+            }
+            verticesList[i-1] = putVertice
+        }
+        Log.d("teste", "onCreate: $verticesList")
+
+        var startVertice = 0
+        for (i in 0 until verticesList.size){
+            val points = ArrayList<Vertice>()
+            for (j in 0  until  verticesList[i]){
+                var index = startVertice + j
+                if (index == pointsSize){
+                    index = 0
+                }
+                val latitude = pointsList[index].latitude
+                val longitude = pointsList[index].longitude
+                points.add(Vertice(latitude,longitude))
+            }
+            points.add(centroid)
+            val polygon = Polygon(points)
+            polygonsList.add(polygon)
+            startVertice += (verticesList[i]-1)
+        }
+
+        for (poligon in polygonsList){
+            polygonsCenters.add(findCentroid(poligon.toLatLngList()))
+        }
+
         Handler(Looper.getMainLooper()).postDelayed({
             val plannerIntent = Intent(this, PlannerActivity::class.java)
             plannerIntent.putExtra("suppliers",suppliersList as Serializable)
@@ -89,7 +138,23 @@ class GeneratingActivity : AppCompatActivity() {
             plannerIntent.putExtra("food",foodList as Serializable)
             plannerIntent.putExtra("income",incomeList as Serializable)
             plannerIntent.putExtra("outcome",outcomeList as Serializable)
+            plannerIntent.putExtra("poligons",polygonsList as Serializable)
+            plannerIntent.putExtra("centers",polygonsCenters as Serializable)
+            plannerIntent.putExtra("latitude",centroidLat)
+            plannerIntent.putExtra("longitude",centroidLng)
             startActivity(plannerIntent)
-        }, 10000)
+        }, 3000)
     }
+
+    fun findCentroid(poligon: List<LatLng>): Vertice{
+        var latitudeSum = 0.0
+        var longitudeSum = 0.0
+        val vertices = poligon.size
+        for (vertice in poligon){
+            latitudeSum += vertice.latitude
+            longitudeSum += vertice.longitude
+        }
+        return Vertice(latitudeSum/vertices, longitudeSum/vertices)
+    }
+
 }
